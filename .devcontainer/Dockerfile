@@ -3,12 +3,20 @@ ARG VARIANT=debian-11
 FROM mcr.microsoft.com/devcontainers/base:${VARIANT}
 WORKDIR /src
 
-# [Optional] Uncomment this section to install additional OS packages you may want.
-#
+# Install Prerrequisites
 RUN apt-get update && \
-    apt install build-essential procps curl file git -y && \
-    curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | /bin/bash
-    
+    apt-get install build-essential procps curl file git --no-install-recommends -y && \
+    rm -rf /var/lib/apt/lists/*
+
+USER vscode
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)" && \
+    sudo chown -R vscode /home/linuxbrew/.linuxbrew/Cellar
+
+# USER vscode
+ENV PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
+
+# Install tools
+RUN brew install kube-score
 
 # https://github.com/zegl/kube-score
 # https://github.com/Shopify/kubeaudit
