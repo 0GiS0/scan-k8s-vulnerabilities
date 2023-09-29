@@ -18,9 +18,7 @@ ENV PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
 # Install tools
 RUN brew install \
     kube-score \
-    kubescape
-
-# https://github.com/zegl/kube-score
-# https://github.com/Shopify/kubeaudit
-# https://github.com/octarinesec/kube-scan
-# https://github.com/controlplaneio/kubesec
+    kubescape \
+    kubeaudit \
+    trivy \
+    
