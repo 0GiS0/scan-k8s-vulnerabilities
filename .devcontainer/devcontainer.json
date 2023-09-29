@@ -33,14 +33,6 @@
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",
 	"features": {
-		"ghcr.io/devcontainers-contrib/features/kubescape:1": {
-			"version": "latest"
-		},
-		"ghcr.io/devcontainers-contrib/features/trivy:1": {
-			"version": "latest"
-		},
-		"ghcr.io/gickis/devcontainer-features/kubeconform:1": {
-			"version": "latest"
-		}
+	
 	}
 }

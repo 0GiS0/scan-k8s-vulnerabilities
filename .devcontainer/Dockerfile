@@ -16,7 +16,9 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/mast
 ENV PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
 
 # Install tools
-RUN brew install kube-score
+RUN brew install \
+    kube-score \
+    kubescape
 
 # https://github.com/zegl/kube-score
 # https://github.com/Shopify/kubeaudit
