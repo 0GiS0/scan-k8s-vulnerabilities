@@ -3,7 +3,6 @@
 kube-score score manifests/*.yaml
 kube-score score manifests/*.yaml --output-format sarif
 
-
 # Kubescape
 # ---------------------------------------------------------------------------------
 kubescape scan manifests/*.yaml
@@ -17,6 +16,10 @@ kubeaudit autofix -f manifests/*.yaml
 # Trivy
 # ---------------------------------------------------------------------------------
 trivy config manifests/
+
+# Checkov
+# ---------------------------------------------------------------------------------
+checkov -d manifests/
 
 # Snyk
 # ---------------------------------------------------------------------------------

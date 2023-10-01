@@ -24,4 +24,5 @@ RUN brew install \
     kubescape \
     kubeaudit \
     trivy \
-    snyk
+    snyk \
+    checkov
