@@ -26,11 +26,11 @@ jobs:
         continue-on-error: true       
         run: |
             snyk iac test ${{ inputs.working-directory }}/*.yaml --sarif || true
-            snyk iac test ${{ inputs.working-directory }}/*.yaml  --sarif  > snyk-docker.sarif
+            snyk iac test ${{ inputs.working-directory }}/*.yaml  --sarif  > snyk-k8s.sarif
 
       # Push the Snyk Code results into GitHub Code Scanning tab
       - name: Upload result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
         if: success() || failure()
         with:
-          sarif_file: snyk-docker.sarif
+          sarif_file: snyk-k8s.sarif
