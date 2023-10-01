@@ -18,7 +18,7 @@ jobs:
         displayName: "Install kubeaudit"
         inputs:
           targetType: "inline"
-          script: "/home/linuxbrew/.linuxbrew/bin/brew install kubeaudit"
+          script: "/home/linuxbrew/.linuxbrew/bin/brew install kubeaudit && kubeaudit version"
       - task: Bash@3
         displayName: "kubeaudit Static Code Analysis"
         continueOnError: true

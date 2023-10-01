@@ -18,7 +18,7 @@ jobs:
         displayName: "Install kube-score"
         inputs:
           targetType: "inline"
-          script: "/home/linuxbrew/.linuxbrew/bin/brew install kube-score"
+          script: "/home/linuxbrew/.linuxbrew/bin/brew install kube-score && kube-score version"
       - task: Bash@3
         displayName: "Kube-score Static Code Analysis"
         continueOnError: true
