@@ -13,6 +13,7 @@ jobs:
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
             (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/vsts/.bash_profile
             eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+            PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
       - task: Bash@3
         displayName: "Install kube-score"
         inputs:
