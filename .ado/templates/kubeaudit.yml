@@ -1,5 +1,5 @@
 parameters:
-  - name: working-directory
+  - name: working_directory
     default: manifests
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
         inputs:
           targetType: "inline"
           script: |
-            kubeaudit all -f ${{ parameters.working-directory }}/*.yaml --format sarif > results.sarif
+            kubeaudit all -f ${{ parameters.working_directory }}/*.yaml --format sarif > results.sarif
       - task: PublishBuildArtifacts@1
         inputs:
           PathtoPublish: "results.sarif"

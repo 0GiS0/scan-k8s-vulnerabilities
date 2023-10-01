@@ -1,7 +1,7 @@
 parameters:
   - name: SNYK_TOKEN # name of the parameter; required
     type: string # data type of the parameter; required
-  - name: working-directory
+  - name: working_directory
     default: manifests
 
 
@@ -19,8 +19,8 @@ jobs:
         displayName: "Scan Kubernetes manifests"
         inputs:
           script: |
-            snyk iac test ${{ parameters.working-directory }}/*.yaml --sarif || true
-            snyk iac test ${{ parameters.working-directory }}/*.yaml --sarif > $(Build.ArtifactStagingDirectory)/snyk-k8s.sarif || true
+            snyk iac test ${{ parameters.working_directory }}/*.yaml --sarif || true
+            snyk iac test ${{ parameters.working_directory }}/*.yaml --sarif > $(Build.ArtifactStagingDirectory)/snyk-k8s.sarif || true
       - task: PublishBuildArtifacts@1
         inputs:
           PathtoPublish: "$(Build.ArtifactStagingDirectory)/snyk-k8s.sarif"

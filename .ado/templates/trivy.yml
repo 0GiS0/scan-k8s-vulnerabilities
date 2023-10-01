@@ -1,7 +1,7 @@
 parameters:
   - name: trivyVersion
     default: 0.45.0
-  - name: working-directory
+  - name: working_directory
     default: manifests
 
 jobs:
@@ -19,7 +19,7 @@ jobs:
         displayName: "Trivy vulnerability scanner in docker mode"
         inputs:
           script: |
-            trivy config ${{ parameters.working-directory }} --format sarif > trivy-results.sarif
+            trivy config ${{ parameters.working_directory }} --format sarif > trivy-results.sarif
       - task: PublishBuildArtifacts@1
         inputs:
           PathtoPublish: "$(Build.ArtifactStagingDirectory)/trivy-results.sarif"

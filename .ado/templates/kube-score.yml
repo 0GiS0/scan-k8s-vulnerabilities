@@ -1,5 +1,5 @@
 parameters:
-  - name: working-directory
+  - name: working_directory
     default: manifests
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
         inputs:
           targetType: "inline"
           script: |
-            kube-score score ${{ parameters.working-directory }}/*.yaml --output-format sarif > results.sarif
+            kube-score score ${{ parameters.working_directory }}/*.yaml --output-format sarif > results.sarif
       - task: PublishBuildArtifacts@1
         inputs:
           PathtoPublish: "results.sarif"

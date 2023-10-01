@@ -1,2 +1,5 @@
 github_conf
 .env
+
+results.json
+report.json

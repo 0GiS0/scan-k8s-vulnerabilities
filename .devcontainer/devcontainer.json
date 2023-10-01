@@ -15,8 +15,6 @@
 			
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
-				"mads-hartmann.bash-ide-vscode",
-				"rogalmic.bash-debug",
 				"GitHub.copilot",
 				"redhat.vscode-yaml",
 				"ms-azuretools.vscode-docker",

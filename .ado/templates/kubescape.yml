@@ -1,5 +1,5 @@
 parameters:
-  - name: working-directory
+  - name: working_directory
     default: manifests
 
 jobs:
