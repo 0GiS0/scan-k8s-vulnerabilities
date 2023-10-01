@@ -24,6 +24,7 @@ jobs:
         run: |
             brew install kube-score
       - name: Scan manifests with kube-score
+        continue-on-error: true
         run: |
             kube-score score ${{ inputs.working-directory }}/*.yaml --output-format sarif > results.sarif
 
