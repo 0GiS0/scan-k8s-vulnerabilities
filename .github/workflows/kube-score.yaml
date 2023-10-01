@@ -26,8 +26,8 @@ jobs:
       - name: Scan manifests with kube-score
         continue-on-error: true
         run: |
-            kube-score score ${{ inputs.working-directory }}/*.yaml --output-format sarif > results.sarif
-
+          kube-score score ${{ inputs.working-directory }}/*.yaml --output-format sarif
+          kube-score score ${{ inputs.working-directory }}/*.yaml --output-format sarif > results.sarif
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v2
         if: success() || failure()

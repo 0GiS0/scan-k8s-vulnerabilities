@@ -24,6 +24,7 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
             scan-type: 'config'
+            scan-ref: ${{ inputs.working-directory }}
             format: 'sarif'
             output: 'trivy-results.sarif'
 
