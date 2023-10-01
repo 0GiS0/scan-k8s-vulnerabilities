@@ -23,5 +23,8 @@ checkov -d manifests/
 
 # Snyk
 # ---------------------------------------------------------------------------------
-snyk auth
+# Load .env
+set -o allexport; source .env; set +o allexport
+
+snyk config set api=$SNYK_TOKEN
 snyk iac test manifests/*.yaml
