@@ -1,0 +1,28 @@
+parameters:
+  - name: SNYK_TOKEN # name of the parameter; required
+    type: string # data type of the parameter; required
+  - name: working-directory
+    default: manifests
+
+
+jobs:
+  - job: Snyk
+    steps:
+      - task: CmdLine@2
+        displayName: "Install Snyc CLI"
+        inputs:
+          script: |
+            curl --compressed https://static.snyk.io/cli/latest/snyk-linux -o snyk
+            chmod +x ./snyk
+            mv ./snyk /usr/local/bin/
+      - task: CmdLine@2
+        displayName: "Scan Kubernetes manifests"
+        inputs:
+          script: |
+            snyk iac test ${{ parameters.working-directory }}/*.yaml --sarif || true
+            snyk iac test ${{ parameters.working-directory }}/*.yaml --sarif > $(Build.ArtifactStagingDirectory)/snyk-k8s.sarif || true
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: "$(Build.ArtifactStagingDirectory)/snyk-k8s.sarif"
+          ArtifactName: "CodeAnalysisLogs"
+          publishLocation: "Container"

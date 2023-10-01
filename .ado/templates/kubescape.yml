@@ -1,0 +1,24 @@
+parameters:
+  - name: working-directory
+    default: manifests
+
+jobs:
+  - job: kubescape
+    steps:
+      - task: Bash@3
+        displayName: "Install kubescape"
+        inputs:
+          targetType: "inline"
+          script: "brew install kubescape"
+      - task: Bash@3
+        displayName: "kubescape Static Code Analysis"
+        continueOnError: true
+        inputs:
+          targetType: "inline"
+          script: |
+            kubescape scan manifests/*.yaml --format sarif > results.sarif
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: "results.sarif"
+          ArtifactName: "CodeAnalysisLogs"
+          publishLocation: "Container"

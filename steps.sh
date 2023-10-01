@@ -17,6 +17,7 @@ kubeaudit autofix -f manifests/*.yaml
 # Trivy
 # ---------------------------------------------------------------------------------
 trivy config manifests/
+trivy config manifests/ --format sarif
 
 # Checkov
 # ---------------------------------------------------------------------------------

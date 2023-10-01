@@ -1,0 +1,24 @@
+parameters:
+  - name: working-directory
+    default: manifests
+
+jobs:
+  - job: kube-score
+    steps:
+      - task: Bash@3
+        displayName: "Install kube-score"
+        inputs:
+          targetType: "inline"
+          script: "brew install kube-score"
+      - task: Bash@3
+        displayName: "Kube-score Static Code Analysis"
+        continueOnError: true
+        inputs:
+          targetType: "inline"
+          script: |
+            kube-score score ${{ parameters.working-directory }}/*.yaml --output-format sarif > results.sarif
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: "results.sarif"
+          ArtifactName: "CodeAnalysisLogs"
+          publishLocation: "Container"

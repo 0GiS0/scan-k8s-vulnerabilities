@@ -1,0 +1,24 @@
+parameters:
+  - name: working-directory
+    default: manifests
+
+jobs:
+  - job: kubeaudit
+    steps:
+      - task: Bash@3
+        displayName: "Install kubeaudit"
+        inputs:
+          targetType: "inline"
+          script: "brew install kubeaudit"
+      - task: Bash@3
+        displayName: "kubeaudit Static Code Analysis"
+        continueOnError: true
+        inputs:
+          targetType: "inline"
+          script: |
+            kubeaudit all -f ${{ parameters.working-directory }}/*.yaml --format sarif > results.sarif
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: "results.sarif"
+          ArtifactName: "CodeAnalysisLogs"
+          publishLocation: "Container"
