@@ -17,7 +17,7 @@ jobs:
         displayName: "Install kubescape"
         inputs:
           targetType: "inline"
-          script: "/home/linuxbrew/.linuxbrew/bin/brew install kubescape && kubescape version"
+          script: "/home/linuxbrew/.linuxbrew/bin/brew install kubescape && ls /home/linuxbrew/.linuxbrew/Cellar/kubescape/2.9.1"
       - task: Bash@3
         displayName: "kubescape Static Code Analysis"
         continueOnError: true
