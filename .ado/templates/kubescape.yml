@@ -5,16 +5,11 @@ parameters:
 jobs:
   - job: kubescape
     steps:
-      - bash: |
-          sudo rm -rf /usr/local/*
-          sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
-        condition: eq(variables['Agent.OS'], 'Linux')
-      - bash: PATH=$PATH:/home/linuxbrew/.linuxbrew/bin 
       - task: Bash@3
         displayName: "Install kubescape"
         inputs:
           targetType: "inline"
-          script: "/home/linuxbrew/.linuxbrew/bin/brew install kubescape && ls /home/linuxbrew/.linuxbrew/Cellar/kubescape/2.9.1"
+          script: "brew install kubescape"
       - task: Bash@3
         displayName: "kubescape Static Code Analysis"
         continueOnError: true

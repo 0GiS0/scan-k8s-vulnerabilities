@@ -19,7 +19,7 @@ pr:
       - README.md
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: macOS-13
 
 jobs:
   - template: "/.ado/templates/trivy.yml"
