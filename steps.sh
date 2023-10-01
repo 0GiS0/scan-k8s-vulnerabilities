@@ -18,4 +18,7 @@ kubeaudit autofix -f manifests/*.yaml
 # ---------------------------------------------------------------------------------
 trivy config manifests/
 
-# 
+# Snyk
+# ---------------------------------------------------------------------------------
+snyk auth
+snyk iac test manifests/*.yaml
