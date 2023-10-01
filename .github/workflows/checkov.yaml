@@ -1,0 +1,31 @@
+name: Checkov Scan
+
+on:
+  workflow_call:
+    inputs:
+      working-directory:
+        description: 'The working directory to scan'
+        type: string
+        required: false
+        default: 'manifests'
+
+jobs:
+  scan:
+    permissions:
+      contents: read
+      security-events: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3    
+      - name: Install Checkov
+        run: |
+          pip install checkov
+      - name: Scan manifests with Checkov
+        run: |
+          checkov -d ${{ inputs.working-directory }} -o sarif
+
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v2
+        if: success() || failure()
+        with:
+          sarif_file: results.sarif

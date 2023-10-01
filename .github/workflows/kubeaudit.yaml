@@ -1,0 +1,31 @@
+name: Kubeaudit Scan
+
+on:
+  workflow_call:
+    inputs:
+      working-directory:
+        description: 'The working directory to scan'
+        type: string
+        required: false
+        default: 'manifests'
+
+jobs:
+  scan:
+    permissions:
+      contents: read
+      security-events: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3    
+      - name: Install kubeaudit
+        run: |
+            brew install kubeaudit
+      - name: Scan manifests with kubeaudit
+        run: |
+            kubeaudit all -f ${{ inputs.working-directory }}/*.yaml --format sarif > results.sarif
+
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v2
+        if: success() || failure()
+        with:
+          sarif_file: results.sarif

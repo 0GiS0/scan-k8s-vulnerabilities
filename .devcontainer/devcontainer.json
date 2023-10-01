@@ -19,7 +19,8 @@
 				"rogalmic.bash-debug",
 				"GitHub.copilot",
 				"redhat.vscode-yaml",
-				"ms-azuretools.vscode-docker"
+				"ms-azuretools.vscode-docker",
+				"esbenp.prettier-vscode"
 			]
 		}
 	},

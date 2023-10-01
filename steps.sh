@@ -11,6 +11,7 @@ kubescape scan manifests/*.yaml --format sarif
 # Kubeaudit
 # ---------------------------------------------------------------------------------
 kubeaudit all -f manifests/*.yaml
+kubeaudit all -f manifests/*.yaml --format sarif
 kubeaudit autofix -f manifests/*.yaml
 
 # Trivy

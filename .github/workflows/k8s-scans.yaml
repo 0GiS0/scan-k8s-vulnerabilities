@@ -1,0 +1,47 @@
+name: K8s scans
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - ".ado/**"
+      - "README.md"
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  checkov:
+    permissions:
+      contents: read
+      security-events: write
+    uses: 0GiS0/scan-k8s-vulnerabilities/.github/workflows/checkov.yaml@main
+  trivy:
+    permissions:
+      contents: read
+      security-events: write
+    uses: 0GiS0/scan-k8s-vulnerabilities/.github/workflows/trivy.yaml@main
+  kube-score:
+    permissions:
+      contents: read
+      security-events: write
+    uses: 0GiS0/scan-k8s-vulnerabilities/.github/workflows/kube-score.yaml@main
+  kubescape:
+    permissions:
+      contents: read
+      security-events: write
+    uses: 0GiS0/scan-k8s-vulnerabilities/.github/workflows/kubescape.yaml@main
+  kubeaudit:
+    permissions:
+      contents: read
+      security-events: write
+    uses: 0GiS0/scan-k8s-vulnerabilities/.github/workflows/kubeaudit.yaml@main
+  snyk:
+    permissions:
+      contents: read
+      security-events: write
+    uses: 0GiS0/scan-k8s-vulnerabilities/.github/workflows/snyk.yaml@main
+    secrets:
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
