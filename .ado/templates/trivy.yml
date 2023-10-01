@@ -22,6 +22,6 @@ jobs:
             trivy config ${{ parameters.working_directory }} --format sarif > trivy-results.sarif
       - task: PublishBuildArtifacts@1
         inputs:
-          PathtoPublish: "$(Build.ArtifactStagingDirectory)/trivy-results.sarif"
+          PathtoPublish: "trivy-results.sarif"
           ArtifactName: "CodeAnalysisLogs"
           publishLocation: "Container"
