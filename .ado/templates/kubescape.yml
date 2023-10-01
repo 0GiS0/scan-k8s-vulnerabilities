@@ -11,6 +11,7 @@ jobs:
           targetType: "inline"
           script: |
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+            PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
       - task: Bash@3
         displayName: "Install kubescape"
         inputs:
