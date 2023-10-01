@@ -3,7 +3,7 @@ parameters:
     default: manifests
 
 jobs:
-  - job: kube-score
+  - job: kube_score
     steps:
       - task: Bash@3
         displayName: "Install kube-score"
