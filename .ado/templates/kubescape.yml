@@ -5,14 +5,11 @@ parameters:
 jobs:
   - job: kubescape
     steps:
-      - task: Bash@3
-        displayName: "Install Homebrew"
-        inputs:
-          targetType: "inline"
-          script: |
-            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-            (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/vsts/.bash_profile
-            eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+      - bash: |
+          sudo rm -rf /usr/local/*
+          sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+        condition: eq(variables['Agent.OS'], 'Linux')
+      - bash: PATH=$PATH:/home/linuxbrew/.linuxbrew/bin 
       - task: Bash@3
         displayName: "Install kubescape"
         inputs:
