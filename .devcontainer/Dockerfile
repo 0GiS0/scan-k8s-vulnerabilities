@@ -15,10 +15,13 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/mast
 # USER vscode
 ENV PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
 
+# Brew tap
+RUN brew tap snyk/tap
+
 # Install tools
 RUN brew install \
     kube-score \
     kubescape \
     kubeaudit \
     trivy \
-    
+    snyk
