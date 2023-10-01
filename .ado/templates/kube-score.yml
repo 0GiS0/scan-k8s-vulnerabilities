@@ -6,6 +6,12 @@ jobs:
   - job: kube_score
     steps:
       - task: Bash@3
+        displayName: "Install Homebrew"
+        inputs:
+          targetType: "inline"
+          script: |
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      - task: Bash@3
         displayName: "Install kube-score"
         inputs:
           targetType: "inline"
