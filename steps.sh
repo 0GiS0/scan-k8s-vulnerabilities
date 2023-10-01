@@ -1,7 +1,7 @@
 # kube-score
 # ---------------------------------------------------------------------------------
 kube-score score manifests/*.yaml
-kube-score score manifests/*.yaml --output-format sarif
+kube-score score manifests/*.yaml --output-format sarif > kube-score-results.sarif
 
 # Kubescape
 # ---------------------------------------------------------------------------------
