@@ -1,29 +1,20 @@
 parameters:
   - name: working_directory
     default: manifests
+  - name: kube_score_version
+    default: 1.17.0
 
 jobs:
-  - job: kube_score
-    # container: kube-score
+  - job: kube_score   
     steps:
-      - script: |
-          (
-            set -x; cd "$(mktemp -d)" &&
-            OS="$(uname | tr '[:upper:]' '[:lower:]')" &&
-            ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&
-            KREW="krew-${OS}_${ARCH}" &&
-            curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz" &&
-            tar zxvf "${KREW}.tar.gz" &&
-            ./"${KREW}" install krew
-          )
-          export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH" >> ~/.bashrc
-
-          # Restart shell
-          exec -l $SHELL          
-        displayName: Install krew
-      - script: |                    
-          kubectl krew install score
-        displayName: "Install kube-score"
+      - task: CmdLine@2
+        displayName: "Download and Install Kube-score"
+        inputs:
+          script: |
+            sudo apt-get install rpm
+            wget https://github.com/zegl/kube-score/releases/download/v1.17.0/kube-score_1.17.0_linux_amd64
+            sudo dpkg -i kube-score_1.17.0_linux_amd64
+            kube-score version      
       - script: kubectl score ${{ parameters.working_directory }}/*.yaml --output-format sarif > results.sarif
         displayName: Scan manifests using kube-score
       - task: PublishBuildArtifacts@1
