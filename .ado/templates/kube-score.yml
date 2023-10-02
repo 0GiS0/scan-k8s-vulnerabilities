@@ -20,6 +20,7 @@ jobs:
           echo $PATH
         displayName: Install krew
       - script: |
+          export PATH="/home/vsts/.krew/bin:$PATH"
           echo $PATH
           kubectl krew install score
         displayName: "Install kube-score"
