@@ -11,7 +11,7 @@ jobs:
           script: |           
             sudo add-apt-repository ppa:kubescape/kubescape
             sudo apt update
-            sudo apt install kubescape
+            sudo apt install kubescape -y
             kubescape version
       - task: Bash@3
         displayName: "kubescape Static Code Analysis"
@@ -19,6 +19,7 @@ jobs:
         inputs:
           targetType: "inline"
           script: |
+            kubescape scan manifests/*.yaml || true
             kubescape scan manifests/*.yaml --format sarif > results.sarif
       - task: PublishBuildArtifacts@1
         inputs:
