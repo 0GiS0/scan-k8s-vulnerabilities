@@ -16,12 +16,12 @@ jobs:
             tar zxvf "${KREW}.tar.gz" &&
             ./"${KREW}" install krew
           )
-          export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-          echo $PATH
+          export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH" >> ~/.bashrc
+
+          # Restart shell
+          exec -l $SHELL          
         displayName: Install krew
-      - script: |
-          export PATH="/home/vsts/.krew/bin:$PATH"
-          echo $PATH
+      - script: |                    
           kubectl krew install score
         displayName: "Install kube-score"
       - script: kubectl score ${{ parameters.working_directory }}/*.yaml --output-format sarif > results.sarif
