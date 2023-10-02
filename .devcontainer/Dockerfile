@@ -25,5 +25,4 @@ RUN brew install \
     kubeaudit \
     trivy \
     snyk \
-    checkov \
-    krew
+    checkov
