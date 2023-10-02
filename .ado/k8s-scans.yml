@@ -21,6 +21,11 @@ pr:
 pool:
   vmImage: ubuntu-latest
 
+resources:
+  containers:
+  - container: kube-score
+    image: zegl/kube-score:v1.17.0
+
 jobs:
   - template: "/.ado/templates/trivy.yml"
   - template: "/.ado/templates/snyk.yml"

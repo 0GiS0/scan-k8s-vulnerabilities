@@ -2,11 +2,6 @@ parameters:
   - name: working_directory
     default: manifests
 
-resources:
-  containers:
-  - container: kube-score
-    image: zegl/kube-score:v1.17.0
-
 jobs:
   - job: kube_score
     pool:
