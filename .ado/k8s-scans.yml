@@ -25,6 +25,7 @@ resources:
   containers:
   - container: kube-score
     image: zegl/kube-score:v1.17.0
+    options: --user 0:0
 
 jobs:
   # - template: "/.ado/templates/trivy.yml"
