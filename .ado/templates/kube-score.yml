@@ -4,8 +4,6 @@ parameters:
 
 jobs:
   - job: kube_score
-    pool:
-      vmImage: ubuntu-latest
     container: kube-score
     steps:
       # - script: brew install kube-score
