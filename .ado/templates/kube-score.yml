@@ -2,11 +2,19 @@ parameters:
   - name: working_directory
     default: manifests
 
+resources:
+  containers:
+  - container: kube-score
+    image: zegl/kube-score:v1.17.0
+
 jobs:
   - job: kube_score
+    pool:
+      vmImage: ubuntu-latest
+    container: kube-score
     steps:
-      - script: brew install kube-score
-        displayName: "Install kube-score"
+      # - script: brew install kube-score
+      #   displayName: "Install kube-score"
       - script: kube-score score ${{ parameters.working_directory }}/*.yaml --output-format sarif > results.sarif
         displayName: Scan manifests using kube-score
       - task: PublishBuildArtifacts@1
