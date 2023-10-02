@@ -1,15 +1,19 @@
 parameters:
   - name: working_directory
     default: manifests
+  - name: kubescape_version
+    default: 2.9.1
 
 jobs:
   - job: kubescape
     steps:
       - task: CmdLine@2
-        displayName: "Install kubescape"
+        displayName: "Download kubescape .tar.gz and extract"
         inputs:
           script: |           
-            curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | /bin/bash
+            wget https://github.com/kubescape/kubescape/releases/download/v${{ parameters.kubescape_version }}/kubescape-arm64-ubuntu-latest.tar.gz
+            tar -xvf kubescape-arm64-ubuntu-latest.tar.gz
+            sudo cp kubescape /usr/local/bin/kubescape
             kubescape version
       - task: Bash@3
         displayName: "kubescape Static Code Analysis"
