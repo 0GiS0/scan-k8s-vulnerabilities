@@ -6,8 +6,8 @@ jobs:
   - job: kube_score
     container: kube-score
     steps:
-      # - script: brew install kube-score
-      #   displayName: "Install kube-score"
+      - script: kubectl krew install score
+        displayName: "Install kube-score"
       - script: kube-score score ${{ parameters.working_directory }}/*.yaml --output-format sarif > results.sarif
         displayName: Scan manifests using kube-score
       - task: PublishBuildArtifacts@1
