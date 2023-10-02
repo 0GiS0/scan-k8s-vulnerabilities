@@ -15,14 +15,12 @@ jobs:
             tar -xvf kubescape-ubuntu-latest.tar.gz
             sudo cp kubescape /usr/local/bin/kubescape
             kubescape version
-      - task: Bash@3
+      - task: CmdLine@2
         displayName: "kubescape Static Code Analysis"
         continueOnError: true
-        inputs:
-          targetType: "inline"
+        inputs:          
           script: |
-            # kubescape scan manifests/*.yaml || true
-            kubescape scan ${{ parameters.working_directory }}/*.yaml --format sarif
+            kubescape scan ${{ parameters.working_directory }} --format sarif
             cat report.sarif
       - task: PublishBuildArtifacts@1
         inputs:
