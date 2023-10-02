@@ -23,6 +23,6 @@ jobs:
             kubescape scan manifests/*.yaml --format sarif > results.sarif
       - task: PublishBuildArtifacts@1
         inputs:
-          PathtoPublish: "results.sarif"
+          PathtoPublish: "report.sarif"
           ArtifactName: "CodeAnalysisLogs"
           publishLocation: "Container"
