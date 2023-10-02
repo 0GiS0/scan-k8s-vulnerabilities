@@ -7,10 +7,8 @@ jobs:
     steps:
       - script: brew install kube-score
         displayName: "Install kube-score"
-      - displayName: "Kube-score Static Code Analysis"
-        continueOnError: true
-        script: |
-            kube-score score ${{ parameters.working_directory }}/*.yaml --output-format sarif > results.sarif
+      - script: kube-score score ${{ parameters.working_directory }}/*.yaml --output-format sarif > results.sarif
+        displayName: Scan manifests using kube-score
       - task: PublishBuildArtifacts@1
         inputs:
           PathtoPublish: "results.sarif"
