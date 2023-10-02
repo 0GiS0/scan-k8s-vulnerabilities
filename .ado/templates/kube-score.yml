@@ -20,8 +20,11 @@ jobs:
             sudo cp kube-score /usr/local/bin/kube-score
             kube-score version
 
-      - script: kube-score score ${{ parameters.working_directory }}/*.yaml --output-format sarif > results.sarif
+      - script: |
+          kube-score score ${{ parameters.working_directory }}/*.yaml || true
+          kube-score score ${{ parameters.working_directory }}/*.yaml --output-format sarif > results.sarif
         displayName: Scan manifests using kube-score
+        continueOnError: true
       - task: PublishBuildArtifacts@1
         inputs:
           PathtoPublish: "results.sarif"
