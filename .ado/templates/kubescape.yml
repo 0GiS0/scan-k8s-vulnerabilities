@@ -11,8 +11,8 @@ jobs:
         displayName: "Download kubescape .tar.gz and extract"
         inputs:
           script: |           
-            wget https://github.com/kubescape/kubescape/releases/download/v${{ parameters.kubescape_version }}/kubescape-arm64-ubuntu-latest.tar.gz
-            tar -xvf kubescape-arm64-ubuntu-latest.tar.gz
+            wget https://github.com/kubescape/kubescape/releases/download/v${{ parameters.kubescape_version }}/kubescape-ubuntu-latest.tar.gz
+            tar -xvf kubescape-ubuntu-latest.tar.gz
             sudo cp kubescape /usr/local/bin/kubescape
             kubescape version
       - task: Bash@3
