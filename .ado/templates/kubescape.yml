@@ -9,9 +9,7 @@ jobs:
         displayName: "Install kubescape"
         inputs:
           script: |           
-            sudo add-apt-repository ppa:kubescape/kubescape
-            sudo apt update
-            sudo apt install kubescape -y
+            curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | /bin/bash
             kubescape version
       - task: Bash@3
         displayName: "kubescape Static Code Analysis"
