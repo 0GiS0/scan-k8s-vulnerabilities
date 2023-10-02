@@ -8,13 +8,18 @@ jobs:
   - job: kube_score   
     steps:
       - task: CmdLine@2
-        displayName: "Download and Install Kube-score"
+        displayName: "Download kube-score .tar.gz and extract"
         inputs:
           script: |
-            sudo apt-get install rpm
-            wget https://github.com/zegl/kube-score/releases/download/v1.17.0/kube-score_1.17.0_linux_amd64
-            sudo dpkg -i kube-score_1.17.0_linux_amd64
-            kube-score version      
+            # sudo apt-get install rpm
+            # wget https://github.com/zegl/kube-score/releases/download/v1.17.0/kube-score_1.17.0_linux_amd64
+            # sudo dpkg -i kube-score_1.17.0_linux_amd64
+            # kube-score version
+            wget https://github.com/zegl/kube-score/releases/download/v1.17.0/kube-score_1.17.0_linux_amd64.tar.gz
+            tar -xvf kube-score_1.17.0_linux_amd64.tar.gz
+            sudo cp kube-score /usr/local/bin/kube-score
+            kube-score version
+
       - script: kubectl score ${{ parameters.working_directory }}/*.yaml --output-format sarif > results.sarif
         displayName: Scan manifests using kube-score
       - task: PublishBuildArtifacts@1
