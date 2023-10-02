@@ -22,9 +22,9 @@ jobs:
           targetType: "inline"
           script: |
             kubeaudit all -f ${{ parameters.working_directory }}/*.yaml || true
-            kubeaudit all -f ${{ parameters.working_directory }}/*.yaml --format sarif > results.sarif
+            kubeaudit all -f ${{ parameters.working_directory }}/*.yaml --format sarif > kube-audit.sarif
       - task: PublishBuildArtifacts@1
         inputs:
-          PathtoPublish: "results.sarif"
+          PathtoPublish: "kube-audit.sarif"
           ArtifactName: "CodeAnalysisLogs"
           publishLocation: "Container"
