@@ -21,6 +21,7 @@ jobs:
           script: |
             # kubescape scan manifests/*.yaml || true
             kubescape scan ${{ parameters.working_directory }}/*.yaml --format sarif
+            cat report.sarif
       - task: PublishBuildArtifacts@1
         inputs:
           PathtoPublish: "report.sarif"
