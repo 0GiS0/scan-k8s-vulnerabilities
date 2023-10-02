@@ -3,10 +3,6 @@
 kube-score score manifests/*.yaml
 kube-score score manifests/*.yaml --output-format sarif > kube-score-results.sarif
 
-# For ADO
-kubectl krew install score
-
-
 # Kubescape
 # ---------------------------------------------------------------------------------
 kubescape scan manifests/*.yaml
@@ -34,4 +30,3 @@ set -o allexport; source .env; set +o allexport
 
 snyk config set api=$SNYK_TOKEN
 snyk iac test manifests/*.yaml
-
