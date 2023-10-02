@@ -17,8 +17,11 @@ jobs:
             ./"${KREW}" install krew
           )
           export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+          echo $PATH
         displayName: Install krew
-      - script: kubectl krew install score
+      - script: |
+          echo $PATH
+          kubectl krew install score
         displayName: "Install kube-score"
       - script: kube-score score ${{ parameters.working_directory }}/*.yaml --output-format sarif > results.sarif
         displayName: Scan manifests using kube-score
