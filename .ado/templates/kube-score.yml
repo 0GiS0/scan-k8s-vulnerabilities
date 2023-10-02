@@ -5,17 +5,11 @@ parameters:
 jobs:
   - job: kube_score
     steps:
-      - task: Bash@3
+      - script: brew install kube-score
         displayName: "Install kube-score"
-        inputs:
-          targetType: "inline"
-          script: "brew install kube-score"
-      - task: Bash@3
-        displayName: "Kube-score Static Code Analysis"
+      - displayName: "Kube-score Static Code Analysis"
         continueOnError: true
-        inputs:
-          targetType: "inline"
-          script: |
+        script: |
             kube-score score ${{ parameters.working_directory }}/*.yaml --output-format sarif > results.sarif
       - task: PublishBuildArtifacts@1
         inputs:
