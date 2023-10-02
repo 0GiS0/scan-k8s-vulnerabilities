@@ -1,21 +1,27 @@
 parameters:
   - name: working_directory
     default: manifests
+  - name: kubeaudit_version
+    default: 0.22.0
 
 jobs:
   - job: kubeaudit
     steps:
-      - task: Bash@3
-        displayName: "Install kubeaudit"
+      - task: CmdLine@2
+        displayName: "Download kubeaudit .tar.gz and extract"
         inputs:
-          targetType: "inline"
-          script: "brew install kubeaudit"
+          script: |           
+            wget https://github.com/Shopify/kubeaudit/releases/download/v${{ parameters.kubeaudit_version }}/kubeaudit_${{ parameters.kubeaudit_version }}_linux_amd64.tar.gz
+            tar -xvf kubeaudit_${{ parameters.kubeaudit_version }}_linux_amd64.tar.gz
+            sudo cp kubeaudit /usr/local/bin/kubeaudit
+            kubeaudit version
       - task: Bash@3
         displayName: "kubeaudit Static Code Analysis"
         continueOnError: true
         inputs:
           targetType: "inline"
           script: |
+            kubeaudit all -f ${{ parameters.working_directory }}/*.yaml || true
             kubeaudit all -f ${{ parameters.working_directory }}/*.yaml --format sarif > results.sarif
       - task: PublishBuildArtifacts@1
         inputs:

@@ -21,20 +21,14 @@ pr:
 pool:
   vmImage: ubuntu-latest
 
-# resources:
-#   containers:
-#   - container: kube-score
-#     image: zegl/kube-score:v1.17.0
-#     options: --user 0:0
-
 jobs:
   # - template: "/.ado/templates/trivy.yml"
   # - template: "/.ado/templates/snyk.yml"
   #   parameters:
   #     SNYK_TOKEN: $(SNYK_TOKEN)
   # - template: "/.ado/templates/checkov.yml"
-  - template: "/.ado/templates/kube-score.yml"
-  # - template: "/.ado/templates/kubeaudit.yml"
+  # - template: "/.ado/templates/kube-score.yml"
+  - template: "/.ado/templates/kubeaudit.yml"
   # - template: "/.ado/templates/kubescape.yml"
 
   
