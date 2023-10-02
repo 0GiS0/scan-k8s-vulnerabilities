@@ -20,7 +20,7 @@ jobs:
           targetType: "inline"
           script: |
             kubescape scan manifests/*.yaml || true
-            kubescape scan manifests/*.yaml --format sarif > results.sarif
+            kubescape scan manifests/*.yaml --format sarif
       - task: PublishBuildArtifacts@1
         inputs:
           PathtoPublish: "report.sarif"

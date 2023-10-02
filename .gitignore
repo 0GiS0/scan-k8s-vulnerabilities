@@ -4,3 +4,4 @@ github_conf
 results.json
 report.json
 kube-score-results.sarif
+report.sarif
