@@ -4,7 +4,7 @@ parameters:
 
 jobs:
   - job: kube_score
-    container: kube-score
+    # container: kube-score
     steps:
       - script: kubectl krew install score
         displayName: "Install kube-score"
