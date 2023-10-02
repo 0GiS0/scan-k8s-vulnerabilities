@@ -10,11 +10,7 @@ jobs:
       - task: CmdLine@2
         displayName: "Download kube-score .tar.gz and extract"
         inputs:
-          script: |
-            # sudo apt-get install rpm
-            # wget https://github.com/zegl/kube-score/releases/download/${{ parameters.kube_score_version }}/kube-score_${{ parameters.kube_score_version }}_linux_amd64
-            # sudo dpkg -i kube-score_${{ parameters.kube_score_version }}_linux_amd64
-            # kube-score version
+          script: |           
             wget https://github.com/zegl/kube-score/releases/download/${{ parameters.kube_score_version }}/kube-score_${{ parameters.kube_score_version }}_linux_amd64.tar.gz
             tar -xvf kube-score_${{ parameters.kube_score_version }}_linux_amd64.tar.gz
             sudo cp kube-score /usr/local/bin/kube-score

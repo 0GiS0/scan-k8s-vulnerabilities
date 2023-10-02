@@ -5,11 +5,14 @@ parameters:
 jobs:
   - job: kubescape
     steps:
-      - task: Bash@3
+      - task: CmdLine@2
         displayName: "Install kubescape"
         inputs:
-          targetType: "inline"
-          script: "brew install kubescape"
+          script: |           
+            sudo add-apt-repository ppa:kubescape/kubescape
+            sudo apt update
+            sudo apt install kubescape
+            kubescape version
       - task: Bash@3
         displayName: "kubescape Static Code Analysis"
         continueOnError: true

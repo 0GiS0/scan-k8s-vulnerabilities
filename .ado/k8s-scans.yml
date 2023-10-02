@@ -28,7 +28,7 @@ jobs:
   #     SNYK_TOKEN: $(SNYK_TOKEN)
   # - template: "/.ado/templates/checkov.yml"
   # - template: "/.ado/templates/kube-score.yml"
-  - template: "/.ado/templates/kubeaudit.yml"
-  # - template: "/.ado/templates/kubescape.yml"
+  # - template: "/.ado/templates/kubeaudit.yml"
+  - template: "/.ado/templates/kubescape.yml"
 
   
