@@ -24,7 +24,7 @@ jobs:
           echo $PATH
           kubectl krew install score
         displayName: "Install kube-score"
-      - script: kube-score score ${{ parameters.working_directory }}/*.yaml --output-format sarif > results.sarif
+      - script: kubectl score ${{ parameters.working_directory }}/*.yaml --output-format sarif > results.sarif
         displayName: Scan manifests using kube-score
       - task: PublishBuildArtifacts@1
         inputs:
